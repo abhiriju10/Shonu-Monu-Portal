@@ -17,15 +17,10 @@ html, body {
   padding: 0;
   overflow: hidden;
   height: 100%;
-}
-
-body {
   font-family: Arial;
   text-align: center;
   background: #c8a2ff;
   color: white;
-  position: fixed;
-  width: 100%;
 }
 
 button {
@@ -38,7 +33,12 @@ button {
 }
 
 #yes { background: white; color: #6a0dad; }
-#no { background: #6a0dad; color: white; position: fixed; }
+
+#no {
+  background: #6a0dad;
+  color: white;
+  position: absolute;
+}
 
 img {
   width: 300px;
@@ -58,22 +58,6 @@ img {
 .glow {
   font-size: 40px;
   margin-top: 35vh;
-  animation: glow 1s infinite alternate;
-}
-
-@keyframes glow {
-  from { text-shadow: 0 0 10px white; }
-  to { text-shadow: 0 0 30px white; }
-}
-
-@keyframes pop {
-  0% { transform: scale(0); opacity: 1; }
-  100% { transform: scale(4); opacity: 0; }
-}
-
-@keyframes fall {
-  0% { transform: translateY(-100px); opacity: 1; }
-  100% { transform: translateY(100vh); opacity: 0; }
 }
 </style>
 </head>
@@ -82,36 +66,4 @@ img {
 
 <h1>Rijuta… will you be my Valentine? 💜</h1>
 
-<img id="slideshow" src="photo1.jpeg"><br>
-
-<button id="yes">YES 💜</button>
-<button id="no">NO 😤</button>
-
-<audio id="music" src="song.mp3" loop></audio>
-
-<div id="celebration">
-  <h1 class="glow">YAYAYAYAYA I LOVE YOUUU 💜💜💜</h1>
-</div>
-
-<script>
-const noBtn = document.getElementById("no");
-const yesBtn = document.getElementById("yes");
-const music = document.getElementById("music");
-const celebration = document.getElementById("celebration");
-
-// unlock audio on first click anywhere
-document.body.addEventListener("click", () => {
-  music.play().catch(()=>{});
-}, { once: true });
-
-// trap NO button inside screen
-noBtn.addEventListener("mouseover", () => {
-  const maxX = window.innerWidth - noBtn.offsetWidth;
-  const maxY = window.innerHeight - noBtn.offsetHeight;
-  const x = Math.random() * maxX;
-  const y = Math.random() * maxY;
-  noBtn.style.left = x + "px";
-  noBtn.style.top = y + "px";
-});
-
-// slideshow
+<img id="slides
