@@ -18,6 +18,8 @@ body {
   text-align: center;
   background: #c8a2ff;
   color: white;
+  overflow: hidden;
+  height: 100vh;
 }
 
 h1 {
@@ -50,50 +52,8 @@ img {
   object-fit: cover;
   border-radius: 20px;
 }
-</style>
-</head>
 
-<body>
-
-<h1>Rijuta… will you be my Valentine? 💜</h1>
-
-<img id="slideshow" src="photo1.jpeg">
-
-<br>
-
-<button id="yes">YES 💜</button>
-<button id="no">NO 😤</button>
-
-<audio id="music" src="song.mp3" loop></audio>
-
-<script>
-const noBtn = document.getElementById("no");
-const yesBtn = document.getElementById("yes");
-const music = document.getElementById("music");
-
-// move NO button
-noBtn.addEventListener("mouseover", () => {
-  noBtn.style.top = Math.random() * window.innerHeight + "px";
-  noBtn.style.left = Math.random() * window.innerWidth + "px";
-});
-
-// slideshow
-let images = ["photo1.jpeg","photo2.jpeg","photo3.jpeg","photo4.jpeg"];
-let i = 0;
-setInterval(() => {
-  const img = document.getElementById("slideshow");
-  if (img) {
-    i = (i + 1) % images.length;
-    img.src = images[i];
-  }
-}, 2000);
-
-// celebration
-yesBtn.addEventListener("click", () => {
-  document.body.innerHTML = "<h1 style='margin-top:40vh;'>YAY!!! 💜💜💜</h1>";
-  music.play();
-});
-</script>
-
-</body>
-</html>
+.glow {
+  font-size: 40px;
+  margin-top: 35vh;
+  animation: glow 1s ease-in-out infinite alternate;
