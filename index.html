@@ -12,18 +12,20 @@ if (password !== "bakuchaku") {
 </script>
 
 <style>
-body {
+html, body {
   margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100%;
+}
+
+body {
   font-family: Arial;
   text-align: center;
   background: #c8a2ff;
   color: white;
-  overflow: hidden;
-  height: 100vh;
-}
-
-h1 {
-  margin-top: 60px;
+  position: fixed;
+  width: 100%;
 }
 
 button {
@@ -35,16 +37,8 @@ button {
   cursor: pointer;
 }
 
-#yes {
-  background: white;
-  color: #6a0dad;
-}
-
-#no {
-  background: #6a0dad;
-  color: white;
-  position: absolute;
-}
+#yes { background: white; color: #6a0dad; }
+#no { background: #6a0dad; color: white; position: fixed; }
 
 img {
   width: 300px;
@@ -53,10 +47,18 @@ img {
   border-radius: 20px;
 }
 
+#celebration {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #c8a2ff;
+  z-index: 999;
+}
+
 .glow {
   font-size: 40px;
   margin-top: 35vh;
-  animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s infinite alternate;
 }
 
 @keyframes glow {
@@ -80,92 +82,36 @@ img {
 
 <h1>Rijuta… will you be my Valentine? 💜</h1>
 
-<img id="slideshow" src="photo1.jpeg">
-
-<br>
+<img id="slideshow" src="photo1.jpeg"><br>
 
 <button id="yes">YES 💜</button>
 <button id="no">NO 😤</button>
 
 <audio id="music" src="song.mp3" loop></audio>
 
+<div id="celebration">
+  <h1 class="glow">YAYAYAYAYA I LOVE YOUUU 💜💜💜</h1>
+</div>
+
 <script>
 const noBtn = document.getElementById("no");
 const yesBtn = document.getElementById("yes");
 const music = document.getElementById("music");
+const celebration = document.getElementById("celebration");
 
-// runaway NO button
+// unlock audio on first click anywhere
+document.body.addEventListener("click", () => {
+  music.play().catch(()=>{});
+}, { once: true });
+
+// trap NO button inside screen
 noBtn.addEventListener("mouseover", () => {
-  noBtn.style.top = Math.random() * (window.innerHeight - 60) + "px";
-  noBtn.style.left = Math.random() * (window.innerWidth - 120) + "px";
+  const maxX = window.innerWidth - noBtn.offsetWidth;
+  const maxY = window.innerHeight - noBtn.offsetHeight;
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY;
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
 });
 
 // slideshow
-let images = ["photo1.jpeg","photo2.jpeg","photo3.jpeg","photo4.jpeg"];
-let i = 0;
-setInterval(() => {
-  const img = document.getElementById("slideshow");
-  if (img) {
-    i = (i + 1) % images.length;
-    img.src = images[i];
-  }
-}, 2000);
-
-// YES click celebration with music fix
-yesBtn.addEventListener("click", () => {
-  music.play().catch(() => {});
-
-  setTimeout(() => {
-    document.body.innerHTML = `<h1 class="glow">YAYAYAYAYA I LOVE YOUUU 💜💜💜</h1>`;
-    fireworks();
-    hearts();
-    confetti();
-  }, 100);
-});
-
-// fireworks
-function fireworks() {
-  for (let i = 0; i < 150; i++) {
-    let dot = document.createElement("div");
-    dot.style.position = "absolute";
-    dot.style.width = "8px";
-    dot.style.height = "8px";
-    dot.style.background = "white";
-    dot.style.borderRadius = "50%";
-    dot.style.top = Math.random() * window.innerHeight + "px";
-    dot.style.left = Math.random() * window.innerWidth + "px";
-    dot.style.animation = "pop 1s ease-out forwards";
-    document.body.appendChild(dot);
-  }
-}
-
-// floating hearts
-function hearts() {
-  for (let i = 0; i < 40; i++) {
-    let heart = document.createElement("div");
-    heart.innerHTML = "💜";
-    heart.style.position = "absolute";
-    heart.style.fontSize = "24px";
-    heart.style.left = Math.random() * window.innerWidth + "px";
-    heart.style.animation = "fall 3s linear forwards";
-    document.body.appendChild(heart);
-  }
-}
-
-// confetti rain
-function confetti() {
-  for (let i = 0; i < 80; i++) {
-    let c = document.createElement("div");
-    c.style.position = "absolute";
-    c.style.width = "6px";
-    c.style.height = "12px";
-    c.style.background = "white";
-    c.style.left = Math.random() * window.innerWidth + "px";
-    c.style.animation = "fall 2s linear forwards";
-    document.body.appendChild(c);
-  }
-}
-</script>
-
-</body>
-</html>
