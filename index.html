@@ -5,7 +5,6 @@
 
 <script>
 let password = prompt("Enter the secret password 💜");
-
 if (password !== "bakuchaku") {
   document.write("<h1 style='color:white;background:black;height:100vh;display:flex;align-items:center;justify-content:center;'>Access denied 😤</h1>");
   throw new Error("Wrong password");
@@ -15,16 +14,14 @@ if (password !== "bakuchaku") {
 <style>
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: Arial;
   text-align: center;
   background: #c8a2ff;
   color: white;
-  overflow: hidden;
 }
 
 h1 {
-  margin-top: 100px;
-  font-size: 40px;
+  margin-top: 60px;
 }
 
 button {
@@ -48,4 +45,55 @@ button {
 }
 
 img {
-  width: 30
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Rijuta… will you be my Valentine? 💜</h1>
+
+<img id="slideshow" src="photo1.jpeg">
+
+<br>
+
+<button id="yes">YES 💜</button>
+<button id="no">NO 😤</button>
+
+<audio id="music" src="song.mp3" loop></audio>
+
+<script>
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+const music = document.getElementById("music");
+
+// move NO button
+noBtn.addEventListener("mouseover", () => {
+  noBtn.style.top = Math.random() * window.innerHeight + "px";
+  noBtn.style.left = Math.random() * window.innerWidth + "px";
+});
+
+// slideshow
+let images = ["photo1.jpeg","photo2.jpeg","photo3.jpeg","photo4.jpeg"];
+let i = 0;
+setInterval(() => {
+  const img = document.getElementById("slideshow");
+  if (img) {
+    i = (i + 1) % images.length;
+    img.src = images[i];
+  }
+}, 2000);
+
+// celebration
+yesBtn.addEventListener("click", () => {
+  document.body.innerHTML = "<h1 style='margin-top:40vh;'>YAY!!! 💜💜💜</h1>";
+  music.play();
+});
+</script>
+
+</body>
+</html>
